@@ -73,7 +73,7 @@ namespace My_first_RPG
 
                     Place StartPlace = new Place(new MyPoint(0, 0), CommonWolf, CommonWolf, CommonWolf, CommonWolf, CommonWolf);// і так покищо сойдьот xD
 
-                    Player = new Warrior(TbName.Text, firstWeapon, StartMiniLocation,StartPlace);
+                    Player = new Warrior(TbName.Text, StartMiniLocation,StartPlace);
                 }
                 catch (DirectoryNotFoundException exc)
                 {
@@ -88,7 +88,6 @@ namespace My_first_RPG
                     file.Close();
                 }
             }
-            MessageBox.Show($"\t\tПерсонаж створений!\n\tІнформація\n\tIм'я:{Player.Name} Зброя:{Player.CurrentWeapon.Name}");
             return Player;
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:My_first_RPG"
         mc:Ignorable="d"
-        Title="WindowEquipment" Height="460" Width="410" AllowsTransparency="True" WindowStyle="None" Background="Transparent">
+        Title="WindowEquipment" Height="510" Width="430" AllowsTransparency="True" WindowStyle="None" Background="Transparent">
     <Grid Margin="0,0,0,0" Opacity="100">
         <Border BorderBrush="Black" BorderThickness="1"   Margin="15,15,15,30" CornerRadius="40,15,40,40" Name="MainBorder" Opacity="100">
             <Border.Background>
@@ -15,32 +15,42 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid Margin="0,0,0,0" Name="MainGrid">
-                <Ellipse Name="ElipseClose" Fill="Crimson" Margin="349,-1,-1,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="30" MouseDown="ElipseClose_MouseDown"/>
-                <GroupBox x:Name="groupBox" Header="Спорядження" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,4,0,0" Height="395" Width="200" BorderBrush="#FFAC695F" BorderThickness="1.5">
+                <Ellipse Name="ElipseClose" Fill="Crimson" Margin="369,-1,-1,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="30" MouseDown="ElipseClose_MouseDown"/>
+                <GroupBox x:Name="groupBox" Header="Спорядження" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,44,0,0" Height="395" Width="200" BorderBrush="#FFAC695F" BorderThickness="1.5">
                     <Image Source="Resourses\SILUET.png" Margin="-76,4,-11,24" Opacity="0.75"/>
 
                 </GroupBox>
-                <Border BorderBrush="Black" HorizontalAlignment="Left" Height="40" Margin="55,63,0,0" VerticalAlignment="Top" Width="40" Background="Gray" Opacity="0.45" CornerRadius="10" BorderThickness="1.4">
+                <Border BorderBrush="Black" HorizontalAlignment="Left" Height="40" Margin="50,101,0,0" VerticalAlignment="Top" Width="40" Background="Gray" Opacity="0.45" CornerRadius="10" BorderThickness="1.4">
                     <Image Margin="2,2,2,2" Name="HelmetImage"/>
                 </Border>
-                <Border BorderBrush="Black" Margin="57,154,0,0" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Gray" Opacity="0.45" CornerRadius="10" BorderThickness="1.4">
-                    <Image Margin="2,2,2,2" Name="BreastPlate"/>
+                <Border BorderBrush="Black" Margin="53,164,0,0" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Gray" Opacity="0.45" CornerRadius="10" BorderThickness="1.4">
+                    <Image Margin="2,2,2,2" Name="BreastPlateImage"/>
                 </Border>
-                <Border Width="40" Height="40" BorderBrush="Black" Margin="57,224,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Gray" Opacity="0.45" CornerRadius="10" BorderThickness="1.4">
+                <Border Width="40" Height="40" BorderBrush="Black" Margin="49,249,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Gray" Opacity="0.45" CornerRadius="10" BorderThickness="1.4">
                     <Image Margin="2,2,2,2" Name="PantsImage"/>
                 </Border>
-                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="34,299,304,74" BorderBrush="Black" BorderThickness="1.4">
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="29,339,329,84" BorderBrush="Black" BorderThickness="1.4">
                     <Image Margin="2,2,2,2" Name="BootsLeftImage"/>
                 </Border>
-                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="79,299,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="1.4" BorderBrush="Black">
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="74,339,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="1.4" BorderBrush="Black">
                     <Image Margin="2,2,2,2" Name="BootsRightImage"/>
                 </Border>
-                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="104,179,234,194" BorderBrush="Black"  BorderThickness="1.4">
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="99,189,259,234" BorderBrush="Black"  BorderThickness="1.4">
                     <Image Margin="2,2,2,2" Name="GlovesRightImage"/>
                 </Border>
-                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="14,174,324,199" BorderBrush="Black" BorderThickness="1.4">
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="9,189,349,234" BorderBrush="Black" BorderThickness="1.4">
                     <Image Margin="2,2,2,2" Name="GlovesLeftImage"/>
                 </Border>
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="99,139,259,284" BorderBrush="Black" BorderThickness="1.4">
+                    <Image Margin="2,2,2,2" Name="ShoulderRightImage"/>
+                </Border>
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="9,139,349,284" BorderBrush="Black" BorderThickness="1.4">
+                    <Image Margin="2,2,2,2" Name="ShoulderLeftImage"/>
+                </Border>
+                <Border Width="40" Height="40" Background="Gray" Opacity="0.45" CornerRadius="10" Margin="109,264,249,159" BorderBrush="Black" BorderThickness="1.4">
+                    <Image Margin="2,2,2,2" Name="WeaponImage"/>
+                </Border>
+                <Label x:Name="labelName" FontSize="24"  Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="149,4,0,0" Height="45" Width="100" FontFamily="MV Boli"/>
             </Grid>
         </Border>
     </Grid>

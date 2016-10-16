@@ -50,7 +50,7 @@ namespace My_first_RPG
                 this.maxdamage = uint.Parse(Damages[0]);
             }
             //Добавлення дій на предметом
-            this.availableactions = new List<ItemActions>() { ItemActions.Одіти, ItemActions.Зняти, ItemActions.Викинути };
+            this.availableactions = new List<ItemActions>() { ItemActions.Зняти, ItemActions.Викинути };
         }
 
 

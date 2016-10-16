@@ -212,25 +212,23 @@ namespace My_first_RPG
         
         float totalSpeed;
         ushort fury;
-        Weapon currentWeapon;
         public ushort Fury { get { return this.fury; } }
-        public Weapon CurrentWeapon { get { return this.currentWeapon; } }
+        
         public float TotalSpeed { get { return this.totalSpeed; } }
 
         public Inventory Inventory { get; private set; }
         public Equipment Equip { get; private set; }
 
-        public Warrior(string Name, Weapon StartWeapon, MiniLocation StartLocation, Place StartPlace) : base(Name,StartLocation,StartPlace)
+        public Warrior(string Name, MiniLocation StartLocation, Place StartPlace) : base(Name,StartLocation,StartPlace)
         {
             this.health = 65;
             this.maxhealth = this.health;
             this.fury = 0;
-            this.currentWeapon = StartWeapon;
             this.currentminilocation = StartLocation;
-            this.currentplace = StartPlace;
-            this.totalSpeed = 500 * this.CurrentWeapon.Speed;
+            this.currentplace = StartPlace;           
             Inventory = new Inventory();
             Equip = new Equipment(this);
+            this.totalSpeed = 500 * this.Equip.CurrentWeapon.Speed;
         }
         
 
@@ -242,7 +240,7 @@ namespace My_first_RPG
         {
             
             
-            string Message = Enemy.TakePhisicalDamage(new Random().Next((int)currentWeapon.MinDamage, (int)currentWeapon.MaxDamage+1),this);
+            string Message = Enemy.TakePhisicalDamage(new Random().Next((int)Equip.CurrentWeapon.MinDamage, (int)Equip.CurrentWeapon.MaxDamage+1),this);
             this.fury += (ushort)new Random().Next(7,11);
             if (this.fury > 100)
                 this.fury = 100;
