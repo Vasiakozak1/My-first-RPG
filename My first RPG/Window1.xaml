@@ -1,0 +1,38 @@
+﻿<Window x:Class="My_first_RPG.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:My_first_RPG"
+        mc:Ignorable="d"
+        Title="Window1" Height="429" Width="493">
+    <Window.Background>
+        <ImageBrush/>
+    </Window.Background>
+    
+    <Grid x:Name="Grid1" Margin="-1,2,-1,0" Background="#FFF0E6E6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="105" Margin="25,25,0,0" VerticalAlignment="Top" Width="155" SelectionChanged="listView_SelectionChanged" ToolTip="Choose your destiny!">
+            <ListView.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.79"/>
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+            <RadioButton x:Name="radioButton1" Content="Воїн" RenderTransformOrigin="0.647,3.067" Width="90" Height="35" FontSize="16" Checked="radioButton1_Checked"/>
+            <RadioButton x:Name="radioButton" Content="Жрець" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" FontSize="16" IsEnabled="False"/>
+        </ListView>
+        <Label x:Name="label" Content="Класи" HorizontalAlignment="Left" Margin="25,20,0,0" VerticalAlignment="Top" Height="30" Width="53" FontSize="14" FontWeight="Bold"/>
+        <TextBox x:Name="TbName" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Margin="185,265,0,0" SpellCheck.IsEnabled="True" Background="#FFE0D9D9" FontFamily="MV Boli" FontSize="16" TextChanged="TbName_TextChanged" FontWeight="Bold"/>
+        <Label x:Name="label1" Content="Ім'я персонажа" HorizontalAlignment="Left" Margin="187,230,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="Btn_Create" Content="Створити!" HorizontalAlignment="Left" Margin="195,305,0,0" VerticalAlignment="Top" Width="110" Height="30" FontSize="16" Click="Btn_Create_Click" BorderThickness="1" BorderBrush="DarkRed" FontWeight="Bold" />
+    </Grid>
+
+</Window>

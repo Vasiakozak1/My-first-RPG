@@ -1,0 +1,20 @@
+﻿<Window x:Class="My_first_RPG.PlayersInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:My_first_RPG"
+        mc:Ignorable="d"
+        Title="PlayersInventory" Height="450" Width="420" AllowsTransparency="True" WindowStyle="None" Background="Transparent">
+    <Grid>
+        <Border Name="MainBorder" BorderBrush="Black" BorderThickness="1"  Margin="20" Background="BurlyWood" CornerRadius="30" >
+            <Border Name="UpperPanelBorder" Margin="0,0,0,374" CornerRadius="30,30,0,0">
+                <Ellipse Fill="Crimson"  Stroke="Black" Margin="339,0,0,0" Height="34" VerticalAlignment="Top" MouseDown="Ellipse_MouseDown" />
+            </Border>
+        </Border>
+        <Label Name="Title" Content="Інвентар" FontSize="16" Margin="160,25,170,395" FontFamily="Arial Black"/>
+
+      
+        <Grid Name="GridForItems" Margin="40,60,40,35" Background="#FFD6B997" />
+    </Grid>
+</Window>

@@ -1,0 +1,165 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace My_first_RPG
+{
+
+    /// <summary>
+    /// Важливий клас, в якому виконуються основні дії гравця
+    /// </summary>
+    ///
+    [Serializable]
+    public class Place
+    {
+        public Place(MyPoint NewCoord,params Monster[] NewMobs)
+        {
+            this.Coordinats = NewCoord;
+            this.Mobs = NewMobs.ToList();
+        }
+
+        public MyPoint Coordinats { get; private set; }
+
+        public List<Monster> Mobs { get; private set; }
+        /*
+         Треба буде добавити ще шось, наприклад шось зв'язане із квестами, наприклад якийсь евент або поява рідкісного моба;
+         Ще можна добавити шось зв'язане із збором ресів
+         */
+        
+     }
+
+    // Можна створити клас Place місце, де иожуть бути моби, якийсь посьолок з НПС, травами, іншими об'єктами з якими можна взаємодіяти
+    interface IMiniLocation
+    {
+        string Name { get; }
+        uint MinLevelMobs { get; }
+        uint MaxlevelMobs { get; }
+
+        string EnterLocation();
+        string MoveIn();// Треба буде добавити аргументи, наприклад:   (в сторону якої локації, і ще шось в перспективі) Хі-хі)))) 
+    }
+    [Serializable]
+    public class MyPoint
+    {
+        public int X;
+        public int Y;
+        public MyPoint(int x,int y)
+        {
+            Y = y;
+            X = x;
+        }
+    }
+
+    [Serializable]
+    public struct Poligone
+    {
+        // Є 4 точки полігону
+        public MyPoint A { get; private set; }
+        public MyPoint B { get; private set; }
+        public MyPoint C { get; private set; }
+        public MyPoint D { get; private set; }
+        public static Poligone CreatePoligone(MyPoint A, MyPoint B, MyPoint C, MyPoint D)
+        {
+            Poligone tmp = new Poligone();
+            tmp.A = A;
+            tmp.B = B;
+            tmp.C = C;
+            tmp.D = D;
+            return tmp;
+        }
+        
+    }
+    [Serializable]
+    public class MiniLocation : IMiniLocation
+    {
+        private string name;
+        private uint minlvlmobs;
+        private uint maxlvlmobs;
+        private List<Place> SpecialPlaces;//Місця із іменними мобами, квестовими предметами і т.д
+        Poligone poligoneOfMiniLocation;
+
+
+
+
+        public MiniLocation(string Name,string MinMaxLvlsMobs,Poligone PoligoneOfMiniLocation)
+        {
+            this.name = Name;
+            this.poligoneOfMiniLocation = PoligoneOfMiniLocation;
+            string[] minmaxlvls = MinMaxLvlsMobs.Split('-');
+            this.minlvlmobs = uint.Parse(minmaxlvls[0]);
+            this.maxlvlmobs = uint.Parse(minmaxlvls[1]);
+        }
+
+
+        
+
+        public Poligone PoligoneOfMiniLocation
+        {
+            get { return this.poligoneOfMiniLocation; }
+        }
+
+        public uint MaxlevelMobs
+        {
+            get { return this.maxlvlmobs; }
+        }
+
+        public uint MinLevelMobs
+        {
+            get { return this.minlvlmobs; }
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+        }
+
+        public string EnterLocation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string MoveIn()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// У малій локації:1-3 підлокації, середня-4-7, велика 7-10
+    /// </summary>
+    class Location
+    {
+        private string name;
+        private List<MiniLocation> minilocations;
+
+
+        public MiniLocation this[int index]
+        {
+            get { return minilocations[index]; }
+           private set { minilocations[index] = value; }
+        }
+
+
+        /// <summary>
+        /// Можна розширити або перегрузити конструктор
+        /// </summary>
+        /// <param name="Name">Назва локації</param>
+        /// <param name="locations">Мінілокації вказуються через кому, бо - params</param>
+        public Location(string Name, params MiniLocation[] locations)
+        {
+            this.minilocations = locations.ToList();
+            this.name = Name;
+            
+
+        }
+        
+        public string Name { get { return this.name; } }
+
+        /// <summary>
+        /// Показує скільки мінілокацій у об'єкті даної локації
+        /// </summary>
+        public uint Size { get { return (uint)minilocations.Count; } }
+    }
+    
+}
