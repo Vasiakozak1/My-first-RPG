@@ -39,6 +39,7 @@ namespace My_first_RPG
         string EnterLocation();
         string MoveIn();// Треба буде добавити аргументи, наприклад:   (в сторону якої локації, і ще шось в перспективі) Хі-хі)))) 
     }
+
     [Serializable]
     public class MyPoint
     {
@@ -73,6 +74,12 @@ namespace My_first_RPG
     [Serializable]
     public class MiniLocation : IMiniLocation
     {
+        /// <summary>
+        /// Item - це предмет який може випасти з любого моба у цій локації
+        /// int - це шанс випадіння
+        /// </summary>
+        public Dictionary<Item, int> DropList;
+
         private string name;
         private uint minlvlmobs;
         private uint maxlvlmobs;
@@ -80,10 +87,8 @@ namespace My_first_RPG
         Poligone poligoneOfMiniLocation;
 
 
-
-
         public MiniLocation(string Name,string MinMaxLvlsMobs,Poligone PoligoneOfMiniLocation)
-        {
+        {   
             this.name = Name;
             this.poligoneOfMiniLocation = PoligoneOfMiniLocation;
             string[] minmaxlvls = MinMaxLvlsMobs.Split('-');

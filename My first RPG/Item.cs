@@ -50,6 +50,14 @@ namespace My_first_RPG
         {
             get { return this.weight; }
         }
+        public void AddAction(ItemActions Action)
+        {
+            this.availableactions.Add(Action);
+        }
+        public void RemoveAction(ItemActions Action)
+        {
+            this.availableactions.Remove(Action);
+        }
     }
     public class HealingPotion:Item
     {

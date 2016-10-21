@@ -19,12 +19,15 @@ namespace My_first_RPG
     /// </summary>
     public partial class ActionsOnItem : Window
     {
-        
-        public ActionsOnItem(Item thing)
-        {           
+        private PlayersInventory inventory;
+        private Item selecteditem;
+        public ActionsOnItem(Item thing,PlayersInventory Inventory)
+        {
+            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             InitializeComponent();
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            ElipseClose.MouseDown += Funct;
+            this.inventory = Inventory;
+            this.selecteditem = thing;
+            ElipseClose.MouseDown += CloseWindow;
             List<ItemActions> actions = thing.AvailableActions;
             for(int i = 0; i < actions.Count; i++)
             {
@@ -32,6 +35,7 @@ namespace My_first_RPG
                 TblockChoice.Background = Brushes.Brown;
                 TblockChoice.Text = actions[i].ToString();
                 TblockChoice.FontSize = 16;
+                TblockChoice.MouseDown += this.DoSelectedWork;
 
                 this.RegisterName("TblockChoice" + i, TblockChoice);
                 StackPanel tmp = MainBorder.Child as StackPanel;
@@ -40,15 +44,42 @@ namespace My_first_RPG
                     , this.MainBorder.Margin.Right, this.MainBorder.Margin.Bottom - 20);
             }
         }
-        private void ActionChoice(object sender, EventArgs e)
+
+        private void CloseWindow(object sender, MouseEventArgs e)
         {
-            TextBlock bl = sender as TextBlock;
-            MessageBox.Show(bl.Text);
             this.Close();
         }
 
-        private void Funct(object sender, MouseEventArgs e)
+        private void DoSelectedWork(object sender, EventArgs e)
         {
+            TextBlock tb = sender as TextBlock;
+            switch (tb.Text)
+            {
+                case "Зняти":
+                    this.selecteditem.RemoveAction(ItemActions.Зняти);
+                    this.selecteditem.AddAction(ItemActions.Одіти);
+                    if (this.selecteditem is Armor)
+                        this.inventory.WindowForEquipment.UnWear(selecteditem as Armor);
+                    else
+                        this.inventory.WindowForEquipment.UnWear((Weapon)selecteditem);
+                    this.inventory.AddItem(selecteditem);
+                    break;
+                case "Викинути":
+                    if (this.selecteditem is Armor)
+                        this.inventory.WindowForEquipment.UnWear(selecteditem as Armor);
+                    else
+                        this.inventory.WindowForEquipment.UnWear((Weapon)selecteditem);
+                    break;
+                case "Одіти":
+                    this.selecteditem.RemoveAction(ItemActions.Одіти);
+                    this.selecteditem.AddAction(ItemActions.Зняти);
+                    if (this.selecteditem is Armor)
+                        this.inventory.WindowForEquipment.Wear(this.selecteditem as Armor);
+                    else
+                        this.inventory.WindowForEquipment.Wear(this.selecteditem as Weapon);
+                    this.inventory.RemoveItem(this.selecteditem);
+                    break;
+            }
             this.Close();
         }
     }

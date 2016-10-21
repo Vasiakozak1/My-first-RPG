@@ -132,7 +132,7 @@ namespace My_first_RPG
             this.labelName.Content = this.equip.Owner.Name;
         }
         public void Wear(Armor ArmorToWear)
-        {
+        {   
             Border tmp;
             switch (ArmorToWear.Type)
             {               
@@ -146,7 +146,7 @@ namespace My_first_RPG
                         this.equip.Helmet = ArmorToWear;
                         break;
                     }
-                    inventory.AddItem(this.equip.Helmet);
+                    
                     this.equip.Helmet = ArmorToWear;
                     break;
                 case ArmorType.Нагрудник:
@@ -159,7 +159,7 @@ namespace My_first_RPG
                         this.equip.Breastplate = ArmorToWear;
                         break;
                     }
-                    this.inventory.AddItem(this.equip.Breastplate);
+                    
                     this.equip.Breastplate = ArmorToWear;
                     break;
                 case ArmorType.Наплечник:
@@ -176,7 +176,6 @@ namespace My_first_RPG
                         this.equip.Shoulders = ArmorToWear;
                         break;
                     }
-                    this.inventory.AddItem(this.equip.Shoulders);
                     this.equip.Shoulders = ArmorToWear;
                     break;
                 case ArmorType.Брюки:
@@ -189,7 +188,6 @@ namespace My_first_RPG
                         this.equip.Pants = ArmorToWear;
                         break;
                     }
-                    this.inventory.AddItem(this.equip.Pants);
                     this.equip.Pants = ArmorToWear;
                     break;
                 case ArmorType.Черевики:
@@ -206,7 +204,6 @@ namespace My_first_RPG
                         this.equip.Boots = ArmorToWear;
                         break;
                     }
-                    this.inventory.AddItem(this.equip.Boots);
                     this.equip.Boots = ArmorToWear;
                     break;
                 case ArmorType.Рукавиці:
@@ -223,15 +220,15 @@ namespace My_first_RPG
                         this.equip.Gloves = ArmorToWear;
                         break;
                     }
-                    this.inventory.AddItem(this.equip.Gloves);
                     this.equip.Gloves = ArmorToWear;
                     break;
                         
             }
         }
+
         public void Wear(Weapon WeaponToWear)
         {
-            this.WeaponImage.Source = new BitmapImage(new Uri(WeaponToWear.PathIconOfItem));
+            this.WeaponImage.Source = new BitmapImage(new Uri(WeaponToWear.PathIconOfItem,UriKind.RelativeOrAbsolute));
             Border tmp = this.WeaponImage.Parent as Border;
             tmp.MouseRightButtonDown += this.ShowActions;
             tmp.Opacity = 100;
@@ -244,6 +241,73 @@ namespace My_first_RPG
             this.equip.CurrentWeapon = WeaponToWear;
             
         }
+
+        /// <summary>
+        /// Зняти предмет з гравця
+        /// </summary>
+        /// <param name="ArmorToUnwear"></param>
+        public void UnWear(Armor ArmorToUnwear)
+        {
+            Border br;
+            switch (ArmorToUnwear.Type)
+            {
+                case ArmorType.Шолом:
+                    this.equip.Helmet = null;
+                    this.HelmetImage.Source = null;
+                    br = this.HelmetImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    break;
+                case ArmorType.Нагрудник:
+                    this.equip.Breastplate = null;
+                    this.BreastPlateImage.Source = null;
+                    br = this.BreastPlateImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    break;
+                case ArmorType.Наплечник:
+                    this.equip.Shoulders = null;
+                    this.ShoulderLeftImage.Source = null;
+                    this.ShoulderRightImage.Source = null;
+                    br = this.ShoulderLeftImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    br = this.ShoulderRightImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    break;
+                case ArmorType.Брюки:
+                    this.equip.Pants = null;
+                    this.PantsImage.Source = null;
+                    br = this.PantsImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    break;
+                case ArmorType.Черевики:
+                    this.equip.Boots = null;
+                    this.BootsLeftImage.Source = null;
+                    this.BootsRightImage.Source = null;
+                    br = this.BootsLeftImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    br = this.BootsRightImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    break;
+                case ArmorType.Рукавиці:
+                    this.equip.Gloves = null;
+                    this.GlovesLeftImage.Source = null;
+                    this.GlovesRightImage.Source = null;
+                    br = this.GlovesLeftImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    br = this.GlovesRightImage.Parent as Border;
+                    br.Opacity = 0.45;
+                    break;
+
+            }
+        }
+
+        public void UnWear(Weapon WeaponToUnwear)
+        {
+            this.equip.CurrentWeapon = null;
+            this.WeaponImage.Source = null;
+            Border br = this.WeaponImage.Parent as Border;
+            br.Opacity = 0.45;
+        }
+
         private void ShowActions(object sender, MouseEventArgs e)
         {
             Border br = sender as Border;
@@ -252,34 +316,34 @@ namespace My_first_RPG
             switch (img.Name)
             {
                 case "HelmetImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Helmet);
+                    ActionsWindow = new ActionsOnItem(this.equip.Helmet,this.inventory);
                     break;
                 case "BreastPlateImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Breastplate);
+                    ActionsWindow = new ActionsOnItem(this.equip.Breastplate, this.inventory);
                     break;
                 case "PantsImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Pants);
+                    ActionsWindow = new ActionsOnItem(this.equip.Pants, this.inventory);
                     break;
                 case "BootsLeftImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Boots);
+                    ActionsWindow = new ActionsOnItem(this.equip.Boots, this.inventory);
                     break;
                 case "BootsRightImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Boots);
+                    ActionsWindow = new ActionsOnItem(this.equip.Boots, this.inventory);
                     break;
                 case "GlovesRightImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Gloves);
+                    ActionsWindow = new ActionsOnItem(this.equip.Gloves, this.inventory);
                     break;
                 case "GlovesLeftImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Gloves);
+                    ActionsWindow = new ActionsOnItem(this.equip.Gloves, this.inventory);
                     break;
                 case "ShoulderRightImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Shoulders);
+                    ActionsWindow = new ActionsOnItem(this.equip.Shoulders, this.inventory);
                     break;
                 case "ShoulderLeftImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.Shoulders);
+                    ActionsWindow = new ActionsOnItem(this.equip.Shoulders, this.inventory);
                     break;
                 case "WeaponImage":
-                    ActionsWindow = new ActionsOnItem(this.equip.CurrentWeapon);
+                    ActionsWindow = new ActionsOnItem(this.equip.CurrentWeapon, this.inventory);
                     break;
                 default:
                     MessageBox.Show("Помилка");

@@ -380,9 +380,10 @@ namespace My_first_RPG
             //Процес гри
             if (IsWarrior)
             {
-                this.InventoryWindow = new PlayersInventory(this.Act.PlayerWarrior.Inventory);
+                this.InventoryWindow = new PlayersInventory(this.Act.PlayerWarrior.Inventory,this.WinEquip);
                 this.WinEquip = new WindowEquipment(this.InventoryWindow, this.Act.PlayerWarrior.Equip);
-                
+                this.InventoryWindow.WindowForEquipment = this.WinEquip;// Костиль
+
                 Act.WarriorMainActivity();
             }
             

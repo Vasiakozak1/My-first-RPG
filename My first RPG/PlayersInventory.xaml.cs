@@ -36,12 +36,15 @@ namespace My_first_RPG
     public partial class PlayersInventory : Window
     {
         private Inventory InventoryItems;
-        public PlayersInventory(Inventory PlayerInventory)
+        public WindowEquipment WindowForEquipment;
+
+        public PlayersInventory(Inventory PlayerInventory,WindowEquipment WindowForEquip)
         {
             
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
- 
+            this.WindowForEquipment = WindowForEquip;
+
             int VerticalMargin = 0;
             int HorisontalMargin = 0;
             this.InventoryItems = PlayerInventory;
@@ -116,9 +119,18 @@ namespace My_first_RPG
         {
             foreach(Border br in this.GridForItems.Children)
             {
+                
+                
                 Image img = br.Child as Image;
-                if (img.Source.ToString() != ItemToRemove.PathIconOfItem)
-                    continue;
+                if (img.Source != null)
+                {
+                    string[] Separate1 = img.Source.ToString().Split('/');
+                    string[] Separate2 = ItemToRemove.PathIconOfItem.Split('\\');
+                    if (Separate1[Separate1.Length - 1] != Separate2[1]) 
+                        continue;
+                    
+                }
+                
                 img.Source = null;
                 int ColumnIndex = int.Parse(br.Name[br.Name.Length - 2].ToString());
                 int RowIndex = int.Parse(br.Name[br.Name.Length - 1].ToString());
@@ -154,7 +166,7 @@ namespace My_first_RPG
             Border br = sender as Border;
             int ColumnIndex = int.Parse(br.Name[br.Name.Length - 2].ToString());
             int RowIndex = int.Parse(br.Name[br.Name.Length - 1].ToString());
-            ActionsOnItem actionswindow = new ActionsOnItem(this.InventoryItems.Items[ColumnIndex, RowIndex]);
+            ActionsOnItem actionswindow = new ActionsOnItem(this.InventoryItems.Items[ColumnIndex, RowIndex],this);
             actionswindow.Show();
         }
     }
