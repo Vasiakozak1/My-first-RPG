@@ -13,10 +13,15 @@ namespace My_first_RPG
     [Serializable]
     public class Place
     {
-        public Place(MyPoint NewCoord,params Monster[] NewMobs)
+        public Place(MyPoint NewCoord,MiniLocation Location,params Monster[] NewMobs)
         {
             this.Coordinats = NewCoord;
             this.Mobs = NewMobs.ToList();
+            int CountOfMobs = new Random().Next(2, 6);
+            for(int i = 0; i < CountOfMobs; i++)
+            {
+                this.Mobs.Add(Location.ListOfMonsters[new Random().Next(0, Location.ListOfMonsters.Count + 1)]);
+            }
         }
 
         public MyPoint Coordinats { get; private set; }
@@ -38,6 +43,8 @@ namespace My_first_RPG
 
         string EnterLocation();
         string MoveIn();// Треба буде добавити аргументи, наприклад:   (в сторону якої локації, і ще шось в перспективі) Хі-хі)))) 
+        Dictionary<int,Item> GlobalDropList { get; }
+        List<Monster> ListOfMonsters { get; }
     }
 
     [Serializable]
@@ -78,22 +85,25 @@ namespace My_first_RPG
         /// Item - це предмет який може випасти з любого моба у цій локації
         /// int - це шанс випадіння
         /// </summary>
-        public Dictionary<Item, int> DropList;
+        
 
         private string name;
         private uint minlvlmobs;
         private uint maxlvlmobs;
         private List<Place> SpecialPlaces;//Місця із іменними мобами, квестовими предметами і т.д
-        Poligone poligoneOfMiniLocation;
+        private Dictionary<int, Item> globalDrop;
+        private Poligone poligoneOfMiniLocation;
+        private List<Monster> monsterslist;
 
-
-        public MiniLocation(string Name,string MinMaxLvlsMobs,Poligone PoligoneOfMiniLocation)
+        public MiniLocation(string Name,string MinMaxLvlsMobs,Poligone PoligoneOfMiniLocation,params Monster[] MobsInThisLocation)
         {   
             this.name = Name;
             this.poligoneOfMiniLocation = PoligoneOfMiniLocation;
             string[] minmaxlvls = MinMaxLvlsMobs.Split('-');
             this.minlvlmobs = uint.Parse(minmaxlvls[0]);
             this.maxlvlmobs = uint.Parse(minmaxlvls[1]);
+
+            this.monsterslist = new List<Monster>(MobsInThisLocation);
         }
 
 
@@ -118,6 +128,13 @@ namespace My_first_RPG
         {
             get { return this.name; }
         }
+
+        /// <summary>
+        /// Ці предмети падають з любого моба в цій локації
+        /// </summary>
+        public Dictionary<int,Item> GlobalDropList { get { return this.globalDrop; } }
+
+        public List<Monster> ListOfMonsters { get { return this.monsterslist; } }
 
         public string EnterLocation()
         {

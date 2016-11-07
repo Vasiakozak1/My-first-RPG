@@ -68,10 +68,11 @@ namespace My_first_RPG
                     tmp = load.Deserialize(file);
                     MiniLocation StartMiniLocation = (MiniLocation)tmp;
 
-                    Wolf CommonWolf = new Wolf("Чахлий вовк", 1, 45, "1-2", 3.0f);
+                    
+                   
 
 
-                    Place StartPlace = new Place(new MyPoint(0, 0), CommonWolf, CommonWolf, CommonWolf, CommonWolf, CommonWolf);// і так покищо сойдьот xD
+                    Place StartPlace = new Place(new MyPoint(0, 0),StartMiniLocation);// і так покищо сойдьот xD
 
                     Player = new Warrior(TbName.Text, StartMiniLocation,StartPlace);
                 }

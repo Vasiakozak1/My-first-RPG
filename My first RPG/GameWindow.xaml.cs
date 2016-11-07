@@ -59,6 +59,7 @@ namespace My_first_RPG
             this.RemovedButtons = new Stack<Button>();
             this.GWindow.LabelPlayerName.Content = this.PlayerWarrior.Name;
             
+            
         }
         public Border OfferBaseActions()//прості дії йти по напрямку і шукати монстрів
         {
@@ -158,9 +159,7 @@ namespace My_first_RPG
                     this.AddTextBlockToPanel(Message);
                     break;
                 case "Показати монстрiв":
-                    showmonstrswindow = new ShowEnemiesWindow(new Wolf("Полярний вовк", 1, 50, "1-2", 3f), new Wolf("Полярний вовк", 1, 50, "1-2", 3f),
-                new Wolf("Полярний вовк", 1, 50, "1-2", 3f), new Wolf("Полярний вовк", 1, 50, "1-2", 3f), new Wolf("Полярний вовк", 1, 50, "1-2", 3f),
-                new Wolf("Полярний вовк", 1, 50, "1-2", 3f), new Wolf("Полярний вовк", 1, 50, "1-2", 3f));
+                    showmonstrswindow = new ShowEnemiesWindow();
                     showmonstrswindow.Show();
                     showmonstrswindow.Closed += TakeMonster;  //коли вибрали противника    
                     
@@ -350,6 +349,46 @@ namespace My_first_RPG
                 this.GWindow.LabelPlayerFury.Content = this.PlayerWarrior.Fury;
                 #endregion
             }
+        }
+        /// <summary>
+        /// Включає в себе появу кновки показати лут, генерація луту, показ вікна з лутом, отримання луту
+        /// </summary>
+        private void Looting(Dictionary<int,Item> LocalLoot,Dictionary<int,Item> GlobalLoot)
+        {
+            #region Ініціалізація кнопки-бордера для показу лута
+
+            Border ButtonLootBorder = new Border();
+            ButtonLootBorder.CornerRadius = new CornerRadius(20);
+            RadialGradientBrush gradient = new RadialGradientBrush();
+            GradientStop stop1 = new GradientStop();
+            stop1.Color = new Color() { R = 0xfF, G = 0x78, B = 0x4b,A=255  };
+            stop1.Offset = 1;
+            GradientStop stop2 = new GradientStop();
+            stop2.Color = new Color() { R = 0xFF, G = 0xBD, B = 0xDE,A=255  };
+            stop2.Offset = 0.451;
+            GradientStop stop3 = new GradientStop();
+            stop3.Color = new Color() { R = 0xFF, G = 0xCB, B = 0xDA, A = 255  };
+            stop3.Offset = 0.708;
+            gradient.GradientStops.Add(stop1); gradient.GradientStops.Add(stop2);gradient.GradientStops.Add(stop2);
+
+            TextBlock BlockOfText = new TextBlock();
+            BlockOfText.Text = "Показати здобич";
+            BlockOfText.Margin = new Thickness(5, 15, 5, 5);
+            BlockOfText.FontSize = 22.0;
+            BlockOfText.TextWrapping = TextWrapping.Wrap;
+            BlockOfText.FontFamily = new FontFamily("Georgia");
+            BlockOfText.FontWeight = FontWeights.Bold;
+            BlockOfText.TextAlignment = TextAlignment.Center;
+            this.GWindow.RegisterName("LootTextBlock", BlockOfText);
+
+            ButtonLootBorder.Child = BlockOfText;
+            ButtonLootBorder.Margin = new Thickness(890, 625, 313, 17);
+            ButtonLootBorder.Background = gradient;
+            this.GWindow.RegisterName("ButtonLoot", ButtonLootBorder);
+            this.GWindow.Grid1.Children.Add(ButtonLootBorder);
+            #endregion
+
+
         }
     }
     

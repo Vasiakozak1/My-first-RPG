@@ -288,11 +288,11 @@ namespace My_first_RPG
             }
             if (Monsters.Length == 0)
             {
-                NewPlace = new Place(NewCoords);               
+                NewPlace = new Place(NewCoords,null);               
             }
             else
             {
-                NewPlace = new Place(NewCoords, Monsters);                
+                NewPlace = new Place(NewCoords,null);                
             }
             this.currentplace = NewPlace;
             return string.Format("Герой пiшов на {0}, тепер вашi координати:{1},{2}", CelectedDirection.ToString(), NewCoords.X, NewCoords.Y);

@@ -23,7 +23,10 @@ namespace My_first_RPG
             this.name = Name;
             this.pureworth = PureWorth;
             this.weight = Weight;
-            this.availableactions = new List<ItemActions>(actions.ToList());
+            if (actions.Length > 0)
+                this.availableactions = new List<ItemActions>(actions.ToList());
+            else
+                this.availableactions = new List<ItemActions>() { ItemActions.Викинути };
             this.iconpath = PathToImage;
             
 
