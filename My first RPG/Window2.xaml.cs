@@ -43,7 +43,8 @@ namespace My_first_RPG
             using (FileStream fs = new FileStream(@"Mobs\1.Sick_wolf.dat", FileMode.Open))
                 sick_wolf = bf.Deserialize(fs) as Monster;
 
-                MiniLocation StartLocation = new MiniLocation("Тиха долина", "1-1", area,gobl_work,sick_wolf);
+            MiniLocation StartLocation = new MiniLocation("Тиха долина", "1-1", area,gobl_work,sick_wolf);
+            StartLocation.GlobalDropList.Add(4, new Item("Блистючий камiнь", 20, 3, @"Resourses\Opal.png"));
             
             bf.Serialize(Serialization, StartLocation);
             Serialization.Close();

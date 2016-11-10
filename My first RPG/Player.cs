@@ -288,13 +288,15 @@ namespace My_first_RPG
             }
             if (Monsters.Length == 0)
             {
-                NewPlace = new Place(NewCoords,null);               
+                NewPlace = new Place(NewCoords,this.CurrentLocation);               
             }
             else
             {
-                NewPlace = new Place(NewCoords,null);                
+                NewPlace = new Place(NewCoords,this.CurrentLocation);                
             }
             this.currentplace = NewPlace;
+            if (!IsInTheMiniLocation(this.CurrentLocation.PoligoneOfMiniLocation))
+                MessageBox.Show("Вийшов за межi локацiї");
             return string.Format("Герой пiшов на {0}, тепер вашi координати:{1},{2}", CelectedDirection.ToString(), NewCoords.X, NewCoords.Y);
         }
 

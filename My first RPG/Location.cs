@@ -16,11 +16,14 @@ namespace My_first_RPG
         public Place(MyPoint NewCoord,MiniLocation Location,params Monster[] NewMobs)
         {
             this.Coordinats = NewCoord;
-            this.Mobs = NewMobs.ToList();
+            this.Mobs = new List<Monster>(NewMobs);
             int CountOfMobs = new Random().Next(2, 6);
+
+            Random rnd = new Random();
             for(int i = 0; i < CountOfMobs; i++)
             {
-                this.Mobs.Add(Location.ListOfMonsters[new Random().Next(0, Location.ListOfMonsters.Count + 1)]);
+                int index = rnd.Next(0, Location.ListOfMonsters.Count);
+                this.Mobs.Add(Location.ListOfMonsters[index]);
             }
         }
 
@@ -104,6 +107,7 @@ namespace My_first_RPG
             this.maxlvlmobs = uint.Parse(minmaxlvls[1]);
 
             this.monsterslist = new List<Monster>(MobsInThisLocation);
+            this.globalDrop = new Dictionary<int, Item>();
         }
 
 

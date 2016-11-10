@@ -159,7 +159,7 @@ namespace My_first_RPG
                     this.AddTextBlockToPanel(Message);
                     break;
                 case "Показати монстрiв":
-                    showmonstrswindow = new ShowEnemiesWindow();
+                    showmonstrswindow = new ShowEnemiesWindow(this.PlayerWarrior.CurrentPlace.Mobs.ToArray());
                     showmonstrswindow.Show();
                     showmonstrswindow.Closed += TakeMonster;  //коли вибрали противника    
                     
@@ -171,6 +171,8 @@ namespace My_first_RPG
         }
         private void TakeMonster(object sender,EventArgs e)
         {
+            if (showmonstrswindow.RetMon() == null)
+                return;
             Monster Enemy = showmonstrswindow.RetMon();
             this.CelectedEnemy = Enemy;
             string Message = string.Format($"{this.PlayerWarrior.Name} проти {Enemy.Name}\n");
@@ -246,6 +248,10 @@ namespace My_first_RPG
                 this.GWindow.ElipseEnemyHealth.Visibility = Visibility.Hidden;
                 this.GWindow.LabelEnemyHealth.Visibility = Visibility.Hidden;
                 this.GWindow.LabelEnemyName.Visibility = Visibility.Hidden;
+                #region Лут
+                this.Looting(this.CelectedEnemy.DropList, this.PlayerWarrior.CurrentLocation.GlobalDropList,this.CelectedEnemy.DropCoefficient);             
+
+                #endregion
                 this.CelectedEnemy = null;
                 this.ShowButtonsInLeftBorder();
             }
@@ -353,7 +359,7 @@ namespace My_first_RPG
         /// <summary>
         /// Включає в себе появу кновки показати лут, генерація луту, показ вікна з лутом, отримання луту
         /// </summary>
-        private void Looting(Dictionary<int,Item> LocalLoot,Dictionary<int,Item> GlobalLoot)
+        private void Looting(Dictionary<int,Item> LocalLoot,Dictionary<int,Item> GlobalLoot,float DropKoof)
         {
             #region Ініціалізація кнопки-бордера для показу лута
 
@@ -384,6 +390,14 @@ namespace My_first_RPG
             ButtonLootBorder.Child = BlockOfText;
             ButtonLootBorder.Margin = new Thickness(890, 625, 313, 17);
             ButtonLootBorder.Background = gradient;
+
+            ButtonLootBorder.MouseDown += (sender, e)=>{
+                ShowLootWindow showLootWnd = new 
+                ShowLootWindow(LocalLoot, GlobalLoot, this.GWindow.InventoryWindow, DropKoof);
+                showLootWnd.Show();
+                ButtonLootBorder.Visibility = Visibility.Hidden;
+            };
+
             this.GWindow.RegisterName("ButtonLoot", ButtonLootBorder);
             this.GWindow.Grid1.Children.Add(ButtonLootBorder);
             #endregion

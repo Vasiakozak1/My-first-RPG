@@ -92,6 +92,9 @@
     <Compile Include="ShowEnemiesWindow.xaml.cs">
       <DependentUpon>ShowEnemiesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowLootWindow.xaml.cs">
+      <DependentUpon>ShowLootWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Thing.cs" />
     <Compile Include="Weapon.cs" />
     <Compile Include="Window1.xaml.cs">
@@ -124,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ShowEnemiesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowLootWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resourses\Fang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resourses\Opal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

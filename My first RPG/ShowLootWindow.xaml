@@ -1,0 +1,20 @@
+﻿<Window x:Class="My_first_RPG.ShowLootWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:My_first_RPG"
+        mc:Ignorable="d"
+        Title="ShowLootWindow" Height="417" Width="200" AllowsTransparency="True" WindowStyle="None" Background="Transparent">
+    <Grid>
+        <Border Background="Tan" CornerRadius="25,20,25,45" Margin="5,0,0,7">
+            <Grid>
+                <Ellipse Fill="Tomato"  Stroke="Black" Width="35 " Height="35" Margin="160,0,0,375" HorizontalAlignment="Left" />
+                <StackPanel Name="PanelList" Margin="0,36,0,40" Background="PapayaWhip">
+                    
+
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

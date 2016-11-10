@@ -41,12 +41,15 @@ namespace My_first_RPG
             int MaxCountInColumn = 1;//максимально можна поставити 3 бордери в стовбець
             for (int i = 0; i < Monsters.Length; i++)
             {
-                Label lbl = new Label();
-                lbl.Height = LabelHeight;
-                lbl.Width = LabelWidth;
-                lbl.Margin = new Thickness(10);
-                lbl.Content = string.Format($"{Monsters[i].Name} \nрiвень:{Monsters[i].Level} \nздоров`я:{Monsters[i].Health} ");
-                this.RegisterName("lbl" + i, lbl);
+                TextBlock textBlck = new TextBlock();
+                textBlck.Height = LabelHeight;
+                textBlck.Width = LabelWidth;
+                textBlck.Margin = new Thickness(10);
+                textBlck.Text = string.Format($"{Monsters[i].Name} \nрiвень:{Monsters[i].Level} \nздоров`я:{Monsters[i].Health} ");
+                textBlck.TextWrapping = TextWrapping.Wrap;
+                this.RegisterName("textblck" + i, textBlck);
+
+               
 
                 Border Bord = new Border();
                 Bord.Width = BorderWidth;
@@ -59,7 +62,7 @@ namespace My_first_RPG
                 Bord.MouseDown += this.ReturnMonster;
                 Bord.Name = "Bord" + i;
                 this.RegisterName("Bord" + i, Bord);
-                Bord.Child = lbl;
+                Bord.Child = textBlck;
                 Grid1.Children.Add(Bord);
 
                 YMargin += 100;

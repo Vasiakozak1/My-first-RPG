@@ -22,8 +22,6 @@ namespace My_first_RPG
         public MainWindow()
         {
             InitializeComponent();
-            
-           
                    
         }
 

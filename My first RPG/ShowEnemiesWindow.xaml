@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:My_first_RPG"
         mc:Ignorable="d"
-        Title="ShowEnemiesWindow" Height="400" Width="500">
+        Title="Монстри" Height="400" Width="500">
     <Grid x:Name="Grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
